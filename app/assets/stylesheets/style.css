@@ -1,0 +1,138 @@
+body
+{
+    margin:0px;
+    padding:0px;
+
+}
+
+.top_container
+{
+    background-color: black;
+    height: 10%;
+    width: 100%;
+    top: 2%;
+    position: absolute;
+
+}
+
+.wrapper
+{
+    width: 70%;
+    margin: auto;
+    height: 70%;
+
+    top: 20%;
+    left: 15%;
+    position: absolute;
+
+
+
+}
+.innerbox{
+    width: auto;
+    height:auto;
+
+    position: relative;
+    top: 1%;
+    left: .5%;
+}
+
+
+.innerbox_page2{
+    width: 50%;
+
+    position: relative;
+    top: 1%;
+    left: .5%;
+}
+.btn_control{
+
+    width: 98%;
+    height: 110px;
+    position: absolute;
+    bottom: 0%;
+    left: .5%;
+}
+.btn_control_page1{
+
+    width: 98%;
+    height: 110px;
+    position: relative;
+    bottom: 0%;
+    left: .5%;
+}
+
+.button_view
+{
+float: left;
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 6px;
+    color: white !important ;
+    margin-top: 5%;
+    margin-right:5%;
+    outline:none;
+    text-align: center;
+    text-decoration: none;
+    width: 13%;
+
+}
+.back_button
+{
+    float: right;
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 6px;
+    color: white !important;
+    margin-top: 5%;
+    margin-right:5%;
+    outline: none !important;
+    text-decoration: none;
+    width: 6%;
+    text-align: center;
+
+
+
+}
+.message_box
+{
+    width: 100%;
+    color: green;
+    height: 5%;
+    padding: 2%;
+    margin-bottom: 5%;
+
+
+}
+.message_box_page2
+{
+    width: 100%;
+
+    height: 5%;
+    padding: 2%;
+    margin-bottom: 5%;
+
+
+}
+
+
+.image_lib_button {
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 6px;
+    color: white;
+    margin-top: 5%;
+    outline: none !important;
+
+
+}
+
+.browse_button
+{
+    background-color: grey;
+    border: 1px solid grey;
+    border-radius: 6px;
+    color: white;
+    margin-top: 5%;
+    outline: none !important;
+}

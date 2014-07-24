@@ -1,0 +1,35 @@
+
+<link href="style.css" rel="stylesheet" type="text/css">
+
+
+<%= form_for(@image_library) do |f| %>
+  <% if @image_library.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@image_library.errors.count, "error") %> prohibited this image_library from being saved:</h2>
+
+      <ul>
+      <% @image_library.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="top_container"></div>
+      <div class="wrapper">
+
+             <div class="innerbox_page2">
+                         <div class="message_box_page2"></div>
+                         <div class="message_box_page2"></div>
+                        <div class="browse_image"><%= f.file_field :image %>
+                        </div>
+
+                <%= f.submit 'Create image', :class => 'image_lib_button' %>
+            </div>
+
+        <div class="btn_control">
+          <%= link_to 'Back', image_libraries_path ,:class => 'back_button' %>
+        </div>
+      </div>
+
+<% end %>

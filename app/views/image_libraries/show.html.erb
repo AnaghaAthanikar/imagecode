@@ -1,0 +1,97 @@
+<link href="style.css" rel="stylesheet" type="text/css">
+
+<style>
+    .blank_area {
+        position: absolute;
+        top: 2%;
+        left: 2%;
+        height: 30%;
+        width: 30%;
+        border: 1px solid red;
+    }
+
+</style>
+
+<div class="top_container"></div>
+<div class="wrapper">
+  <div id="image_container" class="innerbox">
+    <div class="browse_image"><%= image_tag @image_library.image.url, :id => "in_image" %></div>
+  </div>
+
+  <div class="btn_control_page1" id="twitterlink_indv img">
+    <%= link_to 'Edit', edit_image_library_path(@image_library), :class => 'back_button' %> |
+    <%= link_to 'Back', image_libraries_path, :class => 'back_button' %>
+    <button id="add_blank_area" class="button_view">Add Blank Area</button>
+    <button id="create_css_file" class="button_view">Create Css File</button>
+  </div>
+</div>
+
+
+<script type="text/javascript" charset="utf-8">
+    var divArray = [];
+    var counter = 0;
+    var minX = 0; // farthest to left it can go
+    var maxX = 100; // farthest to right it can go
+    var yPosition = 0; // set to your y position
+    $(function () {
+        $("#add_blank_area").on("click", function () {
+            var id = "blank_area_" + counter.toString();
+            $("#image_container").append('<div id="' + id + '" class="blank_area"></div>');
+            $('.blank_area').draggable({
+                containment: $('#image_container'),
+                stop: function () { // change top and left in to percentage
+                    var l = ( 100 * parseFloat($(this).css("left")) / parseFloat($(this).parent().css("width")) ) + "%";
+                    var t = ( 100 * parseFloat($(this).css("top")) / parseFloat($(this).parent().css("height")) ) + "%";
+                    $(this).css("left", l);
+                    $(this).css("top", t);
+                }
+            });
+
+            $('.blank_area').resizable({
+                maxHeight: $('#in_image').height(),
+                maxWidth: $('#in_image').width(),
+                minHeight: 1,
+                minWidth: 2,
+                stop: function (e, ui) {
+                    var parent = ui.element.parent();
+                    ui.element.css({
+                        width: ui.element.width() / parent.width() * 100 + "%",
+                        height: ui.element.height() / parent.height() * 100 + "%"
+                    });
+                }
+            });
+            counter = counter + 1;
+        });
+
+        $("#create_css_file").on("click", function () {
+            var data = {elements: [], id: []}
+            $('.blank_area').each(function (i, v) {
+                id = "#" + $(v).attr('id');
+                height = $(v).height() / $(v).parent().height() * 100 + "%";
+                width = $(v).width() / $(v).parent().width() * 100 + "%";
+                top1 = parseFloat($(v).css('top')) / parseFloat($(v).parent().css('height')) * 100 + "%";
+                left = parseFloat($(v).css('left')) / parseFloat($(v).parent().css('width')) * 100 + "%";
+                data["elements"].push({"id": id, "height": height, "width": width, "top": top1, "left": left});
+            });
+            data['id'].push(<%= @image_library.id %>)
+            $.ajax({ // create JSON
+                url: "/create_css",
+                type: "POST",
+                data: data,
+                success: function (result) {
+                    console.log("Output is")
+                    console.log(result)
+//                    $.fileDownload("<%#= @image_library.image.url %>", {
+//                        preparingMessageHtml: "We are preparing your report, please wait...",
+//                        failMessageHtml: "There was a problem generating your report, please try again."
+//                    });
+//                    $('body').append('<a href="/download_css/<%= @image_library.id  %>">Download this file</a>')
+                    $('div.btn_control_page1').append('<a class="button_view" href="/download_css/<%= @image_library.id %>">Download this file</a>');
+                }
+
+            });
+        });
+    });
+
+
+</script>
